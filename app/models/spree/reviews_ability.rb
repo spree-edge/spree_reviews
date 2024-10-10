@@ -12,6 +12,7 @@ class Spree::ReviewsAbility
   end
 
   def self.allow_anonymous_reviews?
-    !Spree::Reviews::Config[:require_login]
+    store = Spree::Stores::FindCurrent.new.execute
+    !store.review_setting&.require_login
   end
 end

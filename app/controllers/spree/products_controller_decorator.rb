@@ -2,8 +2,14 @@ module Spree
   module ProductsControllerDecorator
     def self.prepended(base)
       base.helper Spree::ReviewsHelper
+      base.before_action :review_setting
     end
 
-    ::Spree::ProductsController.prepend self if ::Spree::Core::Engine.frontend_available? && ::Spree::ProductsController.included_modules.exclude?(self)
+    private
+    def review_setting
+      @review_setting = current_store.review_setting
+    end
   end
 end
+
+::Spree::ProductsController.prepend Spree::ProductsControllerDecorator
