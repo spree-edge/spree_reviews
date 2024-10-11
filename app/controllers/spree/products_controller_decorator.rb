@@ -2,6 +2,7 @@ module Spree
   module ProductsControllerDecorator
     def self.prepended(base)
       base.helper Spree::ReviewsHelper
+      base.helper Spree::ProgressBarHelper
       base.before_action :review_setting
     end
 
