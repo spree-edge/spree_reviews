@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'rails', '7.1.3.4'
+
 spree_version = '>= 4.5'
 gem 'spree', spree_version
 gem 'spree_auth_devise', spree_version

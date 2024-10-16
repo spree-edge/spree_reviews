@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = SpreeReviews.version
   s.summary     = 'Basic review and ratings facility for Spree'
   s.description = s.summary
-  s.required_ruby_version = '>= 2.5.0'
+  s.required_ruby_version = '>= 3.3.0'
 
   s.author    = ['Paul Callaghan']
   s.email     = 'paulcc.two@gmail.com'
@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   spree_version = '>= 4.5'
-  s.add_dependency 'deface', '~> 1.0'
   s.add_dependency 'spree_api', spree_version
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'spree_frontend', spree_version

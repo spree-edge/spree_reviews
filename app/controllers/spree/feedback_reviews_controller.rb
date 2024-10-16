@@ -4,12 +4,13 @@ module Spree
 
     before_action :sanitize_rating, only: :create
     before_action :load_review, only: :create
+    before_action :review_setting, only: :create
 
     def create
       if @review.present?
         @feedback_review = @review.feedback_reviews.new(feedback_review_params)
         @feedback_review.user = spree_current_user
-        @feedback_review.locale = I18n.locale.to_s if Spree::Reviews::Config[:track_locale]
+        @feedback_review.locale = I18n.locale.to_s if @review_setting&.track_locale
         authorize! :create, @feedback_review
         @feedback_review.save
       end
@@ -21,6 +22,10 @@ module Spree
     end
 
     protected
+
+    def review_setting
+      @review_setting = current_store.review_setting
+    end
 
     def load_review
       @review ||= Spree::Review.find_by_id!(params[:review_id])
