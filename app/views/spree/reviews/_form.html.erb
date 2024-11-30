@@ -1,9 +1,9 @@
-<%= form_for review, url: product_reviews_path(product), html: { method: :post } do |f| %>
-  <%= render 'spree/shared/error_messages', target: review %>
+<%= form_for Spree::Review.new(product: @product), url: product_reviews_path(@product), html: { method: :post } do |f| %>
+  <%= render 'spree/shared/error_messages', target: @review %>
 
   <div class="form-group">
     <%= f.label :rating %>
-    <%= render 'spree/reviews/stars', stars: review.rating, edit_enabled: true %>
+    <%= render 'spree/reviews/stars', stars: @review&.rating, edit_enabled: true %>
   </div>
 
   <div class="form-group">
