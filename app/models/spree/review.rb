@@ -28,8 +28,6 @@ class Spree::Review < ActiveRecord::Base
   scope :not_approved, -> { where(approved: false) }
   scope :default_approval_filter, ->(review_setting) { review_setting&.include_unapproved_reviews ? all : approved }
 
-  whitelisted_ransackable_associations = ['store']
-
   def feedback_stars
     return 0 if feedback_reviews.size <= 0
 

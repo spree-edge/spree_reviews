@@ -1,7 +1,6 @@
 module Spree
   class ReviewsController < Spree::StoreController
     helper Spree::BaseHelper
-    helper Spree::ProgressBarHelper
     before_action :load_product, only: [:index, :new, :create]
     before_action :init_pagination, only: [:index]
     before_action :review_setting, only: [:index, :new, :create]
