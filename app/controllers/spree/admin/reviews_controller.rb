@@ -2,6 +2,7 @@ module Spree
   module Admin
     class ReviewsController < ResourceController
       helper Spree::ReviewsHelper
+      before_action :review_setting, only: [:index, :approve, :edit]
 
       def index
         @reviews = collection
@@ -27,8 +28,13 @@ module Spree
 
       private
 
+      def review_setting
+        @review_setting = current_store.review_setting
+      end
+
       def collection
         params[:q] ||= {}
+        params[:q][:store_id_eq] ||= current_store.try(:id)
         @search = Spree::Review.ransack(params[:q])
         @collection = @search.result.includes([:product, :user, :feedback_reviews]).page(params[:page]).per(params[:per_page])
       end

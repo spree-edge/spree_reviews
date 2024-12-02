@@ -15,9 +15,17 @@
   <%= f.text_area :review, wrap: 'virtual', rows: 10, cols: 60, class: 'form-control' %>
 </div>
 
-<% if Spree::Reviews::Config[:track_locale] %>
+<% if @review_setting&.track_locale %>
   <div class="form-group">
     <%= f.label :locale %>
     <%= f.select :locale, I18n.available_locales.map { |lc| [t(lc, default: lc.to_s), lc.to_s] }, {}, class: 'select2' %>
   </div>
+<% end %>
+
+<% if f.object.image.attached? %>
+  <p>
+    <%= label_tag t(:preview) %>
+    <br>
+    <%= image_tag main_app.url_for(f.object.image), class: 'img-fluid', style: 'width: 240px; height: 120px;' %>
+  </p>
 <% end %>
